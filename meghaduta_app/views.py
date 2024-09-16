@@ -45,15 +45,37 @@ def slokaselected(request,uid):
     # Extract the 'sloka' and 'sandhi' values
     sloka = row.iloc[0]['sloka']
     sandhi = row.iloc[0]['sandhi']
+    morph = row.iloc[0]['morph_analysis']  
+    #----------------------------------------------------------
+    import re
+    # Remove specific punctuation if needed
+    sloka = sloka.replace('।', '').replace('॥', '')
+    sandhi = sandhi.replace('।', '').replace('॥', '')
+    sandhi = sandhi.replace("\n", " ")
+
+    # Split the cleaned text
+    sloka_splitted = re.split(r'\s+', sloka)
+    sandhi_splitted = re.split(r'\s+', sandhi)
+    #----------------------------------------------------------
     # Pass these values to the context
-    sloka_splitted=sloka.split(" ")
+    # sloka_splitted=sloka.split(" ")
+    # sandhi_splitted=sandhi.split(" ")
+
+    # Combine the lists into a dictionary
+    word_dict = dict(zip(sloka_splitted, sandhi_splitted))
     context = {
         'sloka': sloka,
         'sandhi': sandhi,
         'sloka_splitted':sloka_splitted,
+        'sandhi_splitted':sandhi_splitted,
+        'word_dict':word_dict,
+        'morph':morph,
     }
+    print(sandhi_splitted)
 
     return render(request,'slokaprocess.html',context)   
     return HttpResponse(sloka)
 def samasam(request):
     return render(request,'samasam.html')
+def user_guide(request):
+    return render(request,'user_guide.html')

@@ -7,5 +7,6 @@ urlpatterns = [
     path('sandhi/',views.sandhi,name='sandhi'),
     path('slokas/',views.slokas,name='slokas'),
     path('samasam/',views.samasam,name='samasam'),
+    path('user_guide/',views.user_guide,name='user_guide'),
     path('slokaselected/<str:uid>',views.slokaselected,name='slokaselected'),
 ]
