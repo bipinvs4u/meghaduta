@@ -24,23 +24,32 @@
     }
 </style>
 <h5 class="text-warning">
-सन्धि (सम् + धा + कि) शब्द का अर्थ है 'मेल' या जोड़। दो निकटवर्ती वर्णों के परस्पर मेल से जो विकार (परिवर्तन) होता है वह संधि कहलाता है। संस्कृत, हिन्दी एवं अन्य 
-भाषाओं में परस्पर स्वरो या वर्णों के मेल से उत्पन्न विकार को सन्धि कहते हैं। जैसे - सम् + तोष = संतोष ; देव + इंद्र = देवेंद्र ; भानु + उदय = भानूदय।
+    इति सन्धि विभाजनपृष्ठम्। भवन्तः show sandhi split इति बटन् क्लिक् कर्तुं शक्नुवन्ति । इदं पूर्वनिर्धारितं विभक्तं कार्यं न तु स्वचालितम्
+    iti sandhi vibhajanaprushtham. bhavantah show sandhi split iti batan clik kartum shaknuvanti . 
+    idam purvanirdharitam vibhaktam karyam na tu svachalitam
 </h5>
 <table class="table table-bordered table-hover">
                
             <div class="sloka">{{sloka}}</div>
             <div class="btn btn-warning pt-1" id="button" onclick="showsandhi()">Show sandhi split</div>
-            <div class="sandhi" id="sandhi">{{sandhi}}</div>
+            <div class="sandhi" id="sandhi">
+                {{sandhi}}
+                <div style="text-align:left;">
+                    <ol>
+                    {%for word,sandhi in word_dict.items%}
+                    {%if '+' in sandhi%}
+                    <li>{{ word }} = {{ sandhi }}</li>
+                    {%endif%}
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
        
     </tbody>
 </table>
-<div style="text-align:left;">
-<ol>
-{%for word in sloka_splitted%}
-<li>{{word}}</li>
-{%endfor%}
-</ol>
+
+<div>
+ {{morph|safe}}
 </div>
 <script>
     function showsandhi(){
@@ -55,5 +64,8 @@
         button.innerHTML='Hide';
     }
     }
+</script>
+<script>
+    
 </script>
 {%endblock%}      
